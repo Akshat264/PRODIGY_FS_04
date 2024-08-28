@@ -1,7 +1,7 @@
 # Secure User Authentication
 
 ## Description
-Full JWT token based authentication : login, register, forgot password, reset password.
+Realtime Chat Application: With full authentication and user profile.
 
 ## Table of Contents
 - [Technologies Used](#technologies-used)
@@ -11,8 +11,8 @@ Full JWT token based authentication : login, register, forgot password, reset pa
 
 ## Technologies Used
 - **Frontend:** React, Vite, CSS
-- **Backend:** Node.js, Express, MongoDB (or your chosen database)
-- **Others:** JWT for authentication, Axios for API calls
+- **Backend:** Node.js, Express, Socket.io, MongoDB (or your chosen database)
+- **Others:** JWT for authentication.
 
 ## Installation
 
