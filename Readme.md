@@ -1,4 +1,4 @@
-# Secure User Authentication
+# Realtime Chat Application
 
 ## Description
 Realtime Chat Application: With full authentication and user profile.
