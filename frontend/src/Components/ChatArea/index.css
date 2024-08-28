@@ -1,0 +1,192 @@
+.chat-window {
+    display: flex;
+    height: 87.5vh; /* Overall chat window height */
+}
+
+.user-list {
+    width: 25%;
+    background: rgb(236, 225, 225);
+    border-right: 1px solid #ccc;
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: 100%; /* Full height of the chat window */
+    overflow-x: hidden;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px black solid;
+    transition: transform 0.3s ease-in;
+}
+.user-item:hover{
+     transform: scale(1.03);
+}
+.user-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-item.selected {
+    background-color: rgb(116, 200, 248);
+    color: black;
+}
+
+.chat-section {
+    width: 75%;
+    padding: 5vh;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Full height of the chat window */
+}
+.chat-section_child{
+    height: 100%;
+}
+.chat-section p {
+    margin: auto;
+    font-size: 18px;
+    color: #666;
+}
+
+.messages {
+    overflow-y: auto; /* Enable vertical scrolling for messages */
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: 90%;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column; /* Ensure messages stack vertically */
+    margin-bottom: 3vh;
+    background-image: url('./assets/bg_image.jpg');
+    background-size: cover;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 50%;
+    display: flex; /* Change to flex to enable alignment */
+    flex-direction: column;
+    color: white;
+    min-width: 30%;
+    gap: 2px;
+    position: relative; /* Enable positioning for dropdown */
+}
+.message-content{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.message_meta{
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+.message strong{
+    font-size: small;
+    color: black;
+    background-color: #dad4d4;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    border-radius: 10px;
+    width: fit-content;
+}
+.message.sent {
+    background: linear-gradient(to bottom right, #ffaf7b, #d76d77, #d040ec);/* Light green for sent messages */
+    align-self: flex-end; /* Align to the right */
+}
+
+.message.received {
+    background: linear-gradient(to bottom right, blue, purple); /* Light red for received messages */
+    align-self: flex-start; /* Align to the left */
+}
+
+.message .options-dropdown {
+    display: none; /* Hide options menu by default */
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 1;
+    font-size: 14px;
+}
+
+.message .options-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.message .options-dropdown button:hover {
+    background-color: #eee;
+}
+
+.message:hover .options-dropdown {
+    display: block; /* Show options menu on message hover */
+}
+
+.message .dropdown-arrow {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+}
+
+.sendmessage_input{
+    width: 85%;
+    height: 7vh;
+    font-size: 16px;
+    padding: 0 2vw;
+    border: none;
+    background-color: rgb(219, 243, 228);
+    border-radius: 20px 0 0 20px;
+}
+
+.sendmessage_btn{
+    width: 13%;
+    height: 7vh;
+    font-size: 16px;
+    background-color: rgb(7, 104, 7);
+    color: white;
+    border: none;
+    align-items: center;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+}
+
+.sendmessage_input:focus{
+    outline: none;
+}
+.btn_msg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sendmessage_btn:hover{
+    background-color: rgb(27, 136, 27);
+    cursor: pointer;
+}

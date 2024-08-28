@@ -1,0 +1,150 @@
+/* Resetting some default styles */
+* {
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+/* Keyframe animation for moving gradient */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Login container */
+.login-container {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    transition: transform 0.3s ease;
+    margin: auto;
+    margin-top: 10vh;
+}
+@media (max-width: 425px){
+    .login-container{
+        height: fit-content;
+        width: 100%;
+    }
+    .login-container:hover {
+        transform: translateY(0px);
+    }
+    .form-group {
+        margin-bottom: 10px;
+    }
+    .login-title {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .form-input {
+        font-size: 12px;
+    }
+}
+/* Adding a subtle hover effect */
+.login-container:hover {
+    transform: translateY(-10px);
+}
+
+/* Login title */
+.login-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Form labels */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Form inputs */
+.form-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Input focus state */
+.form-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Login button */
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Button hover effect */
+.login-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Login links */
+.login-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-links .link {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* Link hover effect */
+.login-links .link:hover {
+    color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px;
+    }
+
+    .login-title {
+        font-size: 24px;
+    }
+
+    .form-input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .login-button {
+        font-size: 14px;
+    }
+}
