@@ -11,6 +11,7 @@ const Message= require("./Models/message.js");
 const http= require("http");
 const server = http.createServer(app);
 const uri=process.env.URL;
+const roomRouter= require("./routes/roomroutes.js");
 const io = socketIo(server, {
   cors: {
       origin: uri, // Allow requests from this origin
@@ -79,11 +80,23 @@ io.on('connection', (socket) => {
       console.log(`User disconnected: ${userId}`);
       // Perform any necessary cleanup or status updates here
   });
-
+socket.on('joinRoom', ({ roomId, userId }) => {
+    socket.join(roomId);
+    console.log(`User ${userId} joined room ${roomId}`);
+});
+socket.on('leaveRoom', ({ roomId, userId }) => {
+  console.log(`User ${userId} left room ${roomId}`);
+});
+// Handle sending messages to a room
+socket.on('sendRoomMessage', (data) => {
+    const { roomId, message, sender } = data;
+    io.to(roomId).emit('receiveRoomMessage', { message, sender, roomId });
+});
   socket.on('disconnect', () => {
       console.log('Client disconnected');
   });
 });
+app.use('/api',roomRouter);
 app.use('/api', authRouter);
 app.use('/api',getPost);
 // app.listen(PORT, () => {
