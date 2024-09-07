@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/LoginForm.css'; // Import the CSS file
+import '../styles/LoginForm.css'; 
 import { useNavigate } from 'react-router-dom';
 const uri= import.meta.env.VITE_API_URL;
 function LoginForm() {
@@ -8,7 +8,7 @@ function LoginForm() {
     const [password, setPassword] = useState('');
     const navigate=useNavigate();
     const onLogin = (user) => {
-          navigate('/', { state: { user } }); // Redirect to the root page with username
+          navigate('/', { state: { user } }); 
       };
     const handleSubmit = async (e) => {
         e.preventDefault();
