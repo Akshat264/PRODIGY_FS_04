@@ -28,7 +28,12 @@ router.post('/register', async (req, res) => {
         const newUser = new User({ email, username, password: hashedPassword });
         await newUser.save();
         const token = jwt.sign({ userId: newUser._id }, 'secret_key',{expiresIn: maxTime});
-        res.cookie('jwt',token,{expiresIn: maxTime, httpOnly: false});
+        res.cookie('jwt', token, {
+          httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+          secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
+          sameSite: 'None', // Allow cross-site cookies (important if frontend and backend have different origins)
+          maxAge: 60 * 60 * 1000 // 1 hour in milliseconds
+      });
         res.json({ message: 'User registered successfully' });
     } catch (error) {
         console.error(error);
@@ -48,7 +53,12 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
         const token = jwt.sign({ userId: user._id }, 'secret_key',{expiresIn: maxTime});
-        res.cookie('jwt',token,{expiresIn: maxTime, httpOnly: false});
+        res.cookie('jwt', token, {
+          httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+          secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
+          sameSite: 'None', // Allow cross-site cookies (important if frontend and backend have different origins)
+          maxAge: 60 * 60 * 1000 // 1 hour in milliseconds
+      });
         res.json({ message: 'Login successful', user: user, token: token});
     } catch (error) {
         console.error(error);

@@ -32,7 +32,6 @@ const ProtectedRoute = ({ component: Component}) => {
     if (isAuthenticated === null) {
         return <div>Loading...</div>; // Show a loading spinner while checking the token
     }
-
     return isAuthenticated ? <Component isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/> : <Navigate to="/login" />;
 };
 
