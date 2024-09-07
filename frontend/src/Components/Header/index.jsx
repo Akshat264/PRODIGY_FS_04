@@ -12,7 +12,7 @@ const Header = ({user,toggleEditProfile,isEditing, onlogout}) => {
     return (
         <header className="header-container">
             <div className="header-logo">
-                <img src={logo} alt="Logo" width="50vw"/>
+                <img src={logo} alt="Logo" className='logo'/>
             </div>
             <div className="header-user">
             <button className={`edit-profile ${isEditing ? "editing edit-profile" : ""}`} onClick={toggleEditProfile}>Edit Profile</button>

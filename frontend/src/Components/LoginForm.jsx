@@ -21,6 +21,7 @@ function LoginForm() {
         const data = await response.json();
         if (data.message === 'Login successful') {
             localStorage.setItem('token', data.token);
+            alert("Successful Login");
             onLogin(data.user); // Handle post-login actions (e.g., storing token, redirecting)
         } else {
             alert('Login failed. Please check your credentials.');

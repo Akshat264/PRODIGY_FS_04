@@ -1,6 +1,8 @@
 .chat-window {
     display: flex;
-    height: 87.5vh; /* Overall chat window height */
+    height: 87.5vh;
+    width: 100%;
+     /* Overall chat window height */
 }
 
 .user-list {
@@ -230,4 +232,90 @@
 .sendmessage_btn:hover{
     background-color: rgb(27, 136, 27);
     cursor: pointer;
+}
+/* Sidebar toggle button for small screens */
+.sidebar-toggle {
+    position: absolute;
+    left: 0;
+    top: 20%;
+    transform: translateY(-50%);
+    background-color: #007bff;
+    height: 10vh;
+    color: white;
+    border-radius: 0px 10px 10px 0px;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Hide the user list on small screens */
+.user-list {
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: rgb(253, 245, 245);
+    transition: left 0.3s ease;
+    z-index: 100;
+}
+
+.user-list.visible {
+    left: 0;
+}
+
+/* On larger screens, make the sidebar always visible */
+@media (max-width: 425px){
+    .chat-section{
+        width: 100%;
+    }
+   .user-list{
+    top: 11%;
+    height: 89%;
+   }
+   .message{
+    max-width: 90%;
+    font-size: 13px;
+    min-width: 40%;
+   }
+   .message .dropdown-arrow{
+    display: none;
+   }
+   .chat-section{
+    padding: 0;
+   }
+   .sendmessage_input{
+    font-size: 13px;
+    padding-left: 8vw;
+    width: 75%;
+   }
+   .sendmessage_btn{
+    font-size: 13px;
+    width: 25%;
+   }
+   .sendmessage_btn span{
+    font-size: 13px;
+   }
+   .list-options button{
+    padding: 3vw 4vw;
+    background-color: #036ee7;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    min-width: 30vw;
+}
+.create-room-input{
+    width: 95%;
+    height: 10vw;
+    border-radius: 10px;
+    border: none;
+    padding-left: 1vw;
+}
+}
+@media (min-width: 426px) {
+    .user-list {
+        position: relative;
+        left: 0;
+        width: 30%;
+    }
 }

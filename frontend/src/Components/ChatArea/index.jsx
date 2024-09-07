@@ -19,6 +19,11 @@ const ChatWindow = ({ user }) => {
     const userId = user._id;
     const [receiverId, setReceiverId] = useState(null);
     const [newRoomName, setNewRoomName] = useState('');
+    const [sidebarVisible, setSidebarVisible] = useState(false); // State for sidebar visibility
+    // Toggle the sidebar visibility
+    const toggleSidebar = () => {
+        setSidebarVisible(!sidebarVisible);
+    };
     useEffect(() => {
         if (!socket) return;
     
@@ -234,31 +239,39 @@ const ChatWindow = ({ user }) => {
 
     return (
         <div className="chat-window">
-            <div className="user-list">
-                <div className='user-list-1'>
-                {viewMode === 'users' ? (
-                    users.map((user) => (
-                        <div
-                            key={user._id}
-                            className={`user-item ${selectedUser && selectedUser._id === user._id ? 'selected' : ''}`}
-                            onClick={() => handleUserSelect(user)}
-                        >
-                            <img src={user.profileImage ? `${uri}${user.profileImage}` : avatar} alt="Avatar" />
-                            <span>{user.username}</span>
-                        </div>
-                    ))
-                ) : (
-                    chatRooms.map((room) => (
-                        <div
-                            key={room._id}
-                            className={`user-item ${selectedChatRoom && selectedChatRoom._id === room._id ? 'selected' : ''}`}
-                            onClick={() => handleChatRoomSelect(room)}
-                        >
-                            <span>{room.name}</span>
-                        </div>
-                    ))
-                )}
+             {/* Sidebar toggle button for small screens */}
+             <button className="sidebar-toggle" onClick={toggleSidebar}>
+                {sidebarVisible ? '←' : '→'}
+            </button>
+
+            {/* Sidebar container with sliding effect */}
+            <div className={`user-list ${sidebarVisible ? 'visible' : ''}`}>
+                <div className="user-list-1">
+                    {viewMode === 'users' ? (
+                        users.map((user) => (
+                            <div
+                                key={user._id}
+                                className={`user-item ${selectedUser && selectedUser._id === user._id ? 'selected' : ''}`}
+                                onClick={() => handleUserSelect(user)}
+                            >
+                                <img src={user.profileImage ? `${uri}${user.profileImage}` : avatar} alt="Avatar" />
+                                <span>{user.username}</span>
+                            </div>
+                        ))
+                    ) : (
+                        chatRooms.map((room) => (
+                            <div
+                                key={room._id}
+                                className={`user-item ${selectedChatRoom && selectedChatRoom._id === room._id ? 'selected' : ''}`}
+                                onClick={() => handleChatRoomSelect(room)}
+                            >
+                                <span>{room.name}</span>
+                            </div>
+                        ))
+                    )}
                 </div>
+
+                {/* List options for switching between users and rooms */}
                 <div className="list-options">
                     <div className='buttons_options'><button onClick={() => setViewMode('users')} style={{backgroundColor: viewMode === "users" && "blue"}}>
                         Users
@@ -314,7 +327,7 @@ const ChatWindow = ({ user }) => {
                                 className='sendmessage_input'
                                 placeholder='Enter your message here'
                             />
-                            <button onClick={sendMessage} className='sendmessage_btn'>Send <span style={{ fontSize: "2vw" }}>&#11162;</span></button>
+                            <button onClick={sendMessage} className='sendmessage_btn'>Send</button>
                         </div>
                     </div>
                 ) : (
