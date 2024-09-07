@@ -14,6 +14,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const authMiddleware= require("../verifyToken.js");
+const uri=process.env.URL;
 // Generate a random token
 function generateToken() {
     return crypto.randomBytes(20).toString('hex');
@@ -27,7 +28,7 @@ router.post('/register', async (req, res) => {
         const newUser = new User({ email, username, password: hashedPassword });
         await newUser.save();
         const token = jwt.sign({ userId: newUser._id }, 'secret_key',{expiresIn: maxTime});
-        res.cookie('jwt',token,{expiresIn: maxTime, httpOnly: true});
+        res.cookie('jwt',token,{expiresIn: maxTime, httpOnly: false});
         res.json({ message: 'User registered successfully' });
     } catch (error) {
         console.error(error);
@@ -47,7 +48,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
         const token = jwt.sign({ userId: user._id }, 'secret_key',{expiresIn: maxTime});
-        res.cookie('jwt',token,{expiresIn: maxTime, httpOnly: true});
+        res.cookie('jwt',token,{expiresIn: maxTime, httpOnly: false});
         res.json({ message: 'Login successful', user: user, token: token});
     } catch (error) {
         console.error(error);
@@ -78,7 +79,7 @@ router.post('/forgot-password', async (req, res) => {
         from: 'akshat2110045@akgec.ac.in',
         to: email,
         subject: 'Reset Password',
-        text: `Click on the following link to reset your password: http://localhost:5173/reset-password/${token}`
+        text: `Click on the following link to reset your password: ${uri}/reset-password/${token}`
       };
   
       await transporter.sendMail(mailOptions);
