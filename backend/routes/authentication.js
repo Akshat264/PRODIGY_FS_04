@@ -178,7 +178,7 @@ router.route('/reset/:token').get( async (req, res) => {
 //     }
 // });
 const upload = multer({ storage });
-router.put('/edit-profile', authMiddleware, upload.single('profileImage'), async (req, res) => {
+router.put('/edit-profile', upload.single('profileImage'), async (req, res) => {
   try {
       const user = await User.findById(req.id);
       if (!user) {
