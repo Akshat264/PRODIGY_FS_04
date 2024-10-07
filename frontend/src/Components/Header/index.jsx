@@ -17,7 +17,7 @@ const Header = ({user,toggleEditProfile,isEditing, onlogout}) => {
             <div className="header-user">
             <button className={`edit-profile ${isEditing ? "editing edit-profile" : ""}`} onClick={toggleEditProfile}>Edit Profile</button>
                 <img
-                    src={user.profileImage ? `${uri}${user.profileImage}` : avatar}
+                    src={user.profileImage ? `${user.profileImage}` : avatar}
                     alt="User Avatar"
                     className="user-avatar"
                     onClick={toggleProfile}

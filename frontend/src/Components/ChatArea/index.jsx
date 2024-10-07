@@ -254,7 +254,7 @@ const ChatWindow = ({ user }) => {
                                 className={`user-item ${selectedUser && selectedUser._id === user._id ? 'selected' : ''}`}
                                 onClick={() => handleUserSelect(user)}
                             >
-                                <img src={user.profileImage ? `${uri}${user.profileImage}` : avatar} alt="Avatar" />
+                                <img src={user.profileImage ? `${user.profileImage}` : avatar} alt="Avatar" />
                                 <span>{user.username}</span>
                             </div>
                         ))

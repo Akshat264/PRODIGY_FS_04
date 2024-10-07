@@ -1,3 +1,4 @@
+const v2= require("cloudinary");
 const express = require('express');
 const bodyParser = require('body-parser');
 require("dotenv").config();
@@ -12,6 +13,11 @@ const http= require("http");
 const server = http.createServer(app);
 const uri=process.env.URL;
 const roomRouter= require("./routes/roomroutes.js");
+v2.config({ 
+  cloud_name: 'dnpmcvjyi', 
+  api_key: '576576496494863', 
+  api_secret: process.env.API_SECRET // Click 'View API Keys' above to copy your API secret
+});
 const io = socketIo(server, {
   cors: {
       origin: uri, // Allow requests from this origin

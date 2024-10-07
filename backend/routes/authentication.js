@@ -15,6 +15,20 @@ const multer = require('multer');
 const path = require('path');
 const authMiddleware= require("../verifyToken.js");
 const uri=process.env.URL;
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'profile_pictures',
+    allowedFormats: ['jpeg', 'png', 'jpg'],
+  },
+});
 // Generate a random token
 function generateToken() {
     return crypto.randomBytes(20).toString('hex');
@@ -103,6 +117,7 @@ router.post('/forgot-password', async (req, res) => {
 });
 router.route("/verify-token").get(async(req,res)=>{
   const token = req.cookies.jwt; 
+  console.log(token);
   if (!token) {
       return res.status(401).json({ message: 'Token not found' });
   }
@@ -154,15 +169,15 @@ router.route('/reset/:token').get( async (req, res) => {
         }
   })
   ////// Functionality for editing the profile
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
-    filename: function (req, file, cb) {
-        cb(null, `${req.id}-${Date.now()}${path.extname(file.originalname)}`);
-    }
-});
-const upload = multer({ storage: storage });
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, 'uploads/');
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, `${req.id}-${Date.now()}${path.extname(file.originalname)}`);
+//     }
+// });
+const upload = multer({ storage });
 router.put('/edit-profile', authMiddleware, upload.single('profileImage'), async (req, res) => {
   try {
       const user = await User.findById(req.id);
@@ -176,9 +191,8 @@ router.put('/edit-profile', authMiddleware, upload.single('profileImage'), async
 
       // Update profile image if uploaded
       if (req.file) {
-          user.profileImage = `/uploads/${req.file.filename}`;
+        user.profileImage = req.file.path; // Cloudinary URL
       }
-
       await user.save();
       res.json({ message: 'Profile updated successfully', user });
   } catch (error) {

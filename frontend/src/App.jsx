@@ -20,6 +20,7 @@ function App() {
                     path="/"
                     element={<ProtectedRoute component={Homepage}/>}
                 />
+                {/* <Route path="/" element={<Homepage/>}/> */}
                 </Routes>
             </div>
         </Router>
