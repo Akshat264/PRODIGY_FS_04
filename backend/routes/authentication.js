@@ -178,7 +178,7 @@ router.route('/reset/:token').get( async (req, res) => {
 //     }
 // });
 const upload = multer({ storage });
-router.put('/edit-profile', upload.single('profileImage'), async (req, res) => {
+router.put('/edit-profile',authMiddleware,upload.single('profileImage'), async (req, res) => {
   try {
       const user = await User.findById(req.id);
       if (!user) {
@@ -188,10 +188,11 @@ router.put('/edit-profile', upload.single('profileImage'), async (req, res) => {
       // Update user fields
       user.username = req.body.username || user.username;
       user.email = req.body.email || user.email;
-
+      console.log(req.file.path);
       // Update profile image if uploaded
       if (req.file) {
         user.profileImage = req.file.path; // Cloudinary URL
+        console.log("saved");
       }
       await user.save();
       res.json({ message: 'Profile updated successfully', user });
