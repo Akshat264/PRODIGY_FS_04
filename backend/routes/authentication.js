@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
         res.cookie('jwt', token, {
           httpOnly: true, // Ensures the cookie is not accessible via JavaScript
           secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
-          // sameSite: 'None', // Allow cross-site cookies (important if frontend and backend have different origins)
+          sameSite: 'None', // Allow cross-site cookies (important if frontend and backend have different origins)
           maxAge: 60 * 60 * 1000 // 1 hour in milliseconds
       });
         res.json({ message: 'Login successful', user: user, token: token});
