@@ -32,7 +32,6 @@ const EditProfile = ({ token, user, updateUser,toggledEditProfile }) => {
 
             if (!response.ok) {
                 throw new Error('Failed to update profile');
-                
             }
             const data = await response.json();
             updateUser(data.user); // Update the user data in the parent component

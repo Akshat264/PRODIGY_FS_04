@@ -37,7 +37,7 @@
 
 .edit-profile-form button {
     padding: 10px 15px;
-    background-color: #333;
+    background-color: rgb(16, 46, 74);
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -45,5 +45,5 @@
 }
 
 .edit-profile-form button:hover {
-    background-color: #555;
+    background-color: rgb(12, 61, 107);
 }

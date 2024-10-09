@@ -331,7 +331,7 @@ const ChatWindow = ({ user }) => {
                         </div>
                     </div>
                 ) : (
-                    <p>Select a {viewMode === 'users' ? 'user' : 'chat room'} to start chatting</p>
+                    <p style={{fontSize: "23px", color: "white", fontWeight: "800"}}>Select a {viewMode === 'users' ? 'user' : 'chat room'} to start chatting</p>
                 )}
             </div>
         </div>
